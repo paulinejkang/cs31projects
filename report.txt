@@ -1,0 +1,17 @@
+Pauline Kang
+CS 1 Lecture 1 Dis 1A
+Prof. Smallberg
+
+Project 1 Report1
+
+Step 5: I input numbers like (10, 4, 3) which don't make sense because they do not add up to 10. The output was
+    40% and 30% and that does not add up to a 100%. I also used the input (-40, 1, 2.3) which consists of negative numbers and decimals.
+    The output was two negative percentages and did not add up to 100%. 
+
+Step 6: In logic_error.cpp, I made the percentage 10.0 and 17.0 respectively rather than 100.0 which shows the wrong ratio 
+    for the percentage than it should.
+
+Step 7: In compile_error.cpp, I created one syntax error and a typo with a function. One was missing a ';" at the end of a declration 
+    the integer unlikely (fails to find). The other error was that I set the function as set rather than setf. C++ cannot find a 
+    function called set so it was not able to compile. 
+
