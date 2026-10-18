@@ -1,0 +1,36 @@
+Pauline Kang
+CS 31 Lecture 1 Dis 1A
+Prof. Smallberg
+
+Project 2 Report
+
+A. Notable Obstacles
+
+- Reading input: cin >> only read one word, so names with spaces got cut off
+  and empty input couldn't be detected. I switched to getline. Then the
+  industry question got skipped because of the leftover Enter after reading
+  the sales, which I fixed with cin.ignore(10000, '\n').
+- Error handling: My program first re-prompted after an error. I changed it to
+  print "---", then one error message, then stop, as the spec requires.
+- Calculation details: I applied 19% to all sales instead of only the first
+  80 trillion, used > instead of >= for the 300 trillion bonus, didn't treat 0
+  employees as an error, and forgot two-decimal formatting. Testing against
+  the spec examples and the online calculator helped me catch these.
+
+
+B. Test data
+(company name, annual sales, industry, employees)
+
+- Spec example, mud industry with employee bonus (Elbocorp, 337, mud, 39)
+- Sales only in tier 1 (Elboniato, 50, farming, 132)
+- Tier 2, phishing at 13% (Phish Co, 100, phishing, 5)
+- Industry capitalized differently, should get 11% (Cap Co, 337, Mud, 39)
+- Sales exactly 300, employee bonus applies (Exact Co, 300, farming, 100)
+- Sales in tier 3 (Big Co, 580, phishing, 423)
+- Name and industry with spaces (Elbonian Motors, 100, pig grooming, 5)
+- Empty company name ("", 100, farming, 5)
+- Negative sales (Neg Co, -5, farming, 5)
+- Empty industry (Blank Co, 100, "", 5)
+- Zero employees (None Co, 100, farming, 0)
+
+All of these test cases are handled correctly by my program.

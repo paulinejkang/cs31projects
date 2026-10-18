@@ -1,0 +1,89 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main(){
+    
+    // Initialization
+    string name;
+    double sales;
+    string industry;
+    int employees;
+    double amount = 0.00;
+
+    // Read company name and check that it's not empty
+    cout << "Company name: ";
+    getline(cin, name);
+    if (name.empty()){
+        cout << "---" << endl;
+        cout << "You must enter a company name." << endl;
+        return 1;
+    }
+
+    // Read annual sales and check that it's not negative
+    cout << "Annual sales (in trillions): ";
+    cin >> sales;
+    cin.ignore(10000, '\n');
+    if (sales < 0){
+        cout << "---" << endl;
+        cout << "The annual sales must not be negative." << endl;
+        return 1;
+    }
+
+    // Read industry name and check that it's not empty
+    cout << "Industry: ";
+    getline(cin, industry);
+    if (industry.empty()){
+        cout << "---" << endl;
+        cout << "You must enter an industry." << endl;
+        return 1;
+    }
+
+    // Read number of employees and check that it's not 0 or negative
+    cout << "Number of employees: ";
+    cin >> employees;
+    if (employees <= 0){
+        cout << "---" << endl;
+        cout << "The number of employees must be positive." << endl;
+        return 1;
+    }
+    cout << "---" << endl;
+
+    // Tier 1: 19% of the 80 trillion in sales
+    if (sales <= 80) {
+        amount += 0.19 * sales;
+    }
+    else{
+        amount += 0.19 * 80;
+    }
+
+    // Tier 2: 11% (13% in phishing and mud) of the next 400 trillion
+    if (sales > 80){
+        double sub = sales-80;
+        if(sub > 400) sub = 400;
+        if (industry == "phishing" || industry == "mud"){
+            amount += (sub) * 0.13;
+        }
+        else { 
+            amount += (sub) * 0.11;
+        }
+    }
+
+    // Tier 3: 3% of the money more than 480 trillion
+    if (sales > 480){
+        amount += (sales-480) * 0.03;
+    }
+
+    // Employee bonus for companies with at least 300 trillion in sales
+    if(sales >= 300){
+        amount += 0.01 * (employees);
+    }
+
+    // Print result
+    cout.setf(ios::fixed);
+    cout.precision(2);
+    cout << name << " can borrow up to G" << amount << " trillion." << endl;
+    
+}
+
