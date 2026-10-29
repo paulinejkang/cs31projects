@@ -1,0 +1,66 @@
+Pauline Kang
+CS 31 Lecture 1 Dis 1A
+Prof. Smallberg
+
+Project 3 Report
+
+A. Notable Obstacles
+
+- Iterating through the string: The different pieces have different lengths because of the 
+different parts of each input (e.g party, digits, etc). Moving the position variable around 
+made me confused a little bit
+- Converting digit characters to numbers: I used pollData[i]- '0', and for two digits multiplied
+the first by 10 and added the second
+
+B. Design
+
+hasCorrectSyntax() checks through the string one state forecast at a time, checking the code,
+then any party results, then expecting either the end of the string or a comma.
+
+hasCorrectSyntax:
+    if string is empty, return true
+    repeatedly:
+        if next two characters aren't a valid state code, return false
+        while a party result starts here:
+            if it isn't 1 or 2 digits followed by a letter, return false
+        if at end of string, return true
+        if not at a comma, return false
+        skip the comma
+
+predictSeats first checks for errors then iteratures through the string
+
+predictSeats:
+    if syntax is bad, return 1
+    if party isn't a letter, return 2
+    for each state forecast:
+        for each party result:
+            if its party matches (ignoring case),
+                add its seat count to running total
+    set seatPrediction to the total and return 0
+
+
+C. Test Data
+
++ In addition to the assert tests from the spec
+assert(hasCorrectSyntax("vt"));                          // lowercase, no party results
+assert(hasCorrectSyntax("cA5d"));                        // mixed case
+assert(hasCorrectSyntax("NJ3D5R4D"));                    // same party twice in a state
+assert(hasCorrectSyntax("CT0D"));                        // zero seats
+assert(hasCorrectSyntax("CT01D"));                       // leading zero
+assert(!hasCorrectSyntax("ZT5D"));                       // invalid state code
+assert(!hasCorrectSyntax("5D"));                         // missing state code
+assert(!hasCorrectSyntax("C"));                          // only one character
+assert(!hasCorrectSyntax("CT5D,"));                      // trailing comma
+
+seats = -999;
+assert(predictSeats("CT5D,NY9R16D1I,VT,ne3r00D", 'd', seats) == 0 && seats == 21);  // lowercase party
+seats = -999;
+assert(predictSeats("NY9R16D1I,Vt,NJ3d5r4D,KS4R", 'R', seats) == 0 && seats == 18); // across states
+seats = -999;
+assert(predictSeats("NJ3D5R4D", 'D', seats) == 0 && seats == 7);                   // same party twice
+seats = -999;
+assert(predictSeats("CT5D,NY9R16D1I,VT,ne3r00D", 'd', seats) == 0 && seats == 21);  // lowercase party
+seats = -999;
+assert(predictSeats("NY9R16D1I,Vt,NJ3d5r4D,KS4R", 'R', seats) == 0 && seats == 18); // across states
+seats = -999;
+assert(predictSeats("NJ3D5R4D", 'D', seats) == 0 && seats == 7);                   // same party twice
